@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 import openpyxl
 import numpy as np
 
-# توليد تاريخ عشوائي
+#generating random date function
 def generate_random_date():
     start_date = datetime(2015, 1, 1)
     end_date = datetime(2023, 12, 31)
@@ -14,9 +14,9 @@ def generate_random_date():
         return date.strftime('%d/%m/%Y')  
     else:
         return f"{date.day}/{date.strftime('%m/%Y')}"
+    
 
-
-# توليد اسم مريض عشوائي حسب الجنس
+# generating random name and gender function
 def random_name_gender():
     male_first_names = ['John', 'Mike', 'Chris', 'Tom']
     female_first_names = ['Jane', 'Anna', 'Sara', 'Laura']
@@ -29,7 +29,7 @@ def random_name_gender():
         name = f"{random.choice(female_first_names)} {random.choice(last_names)}"
     return name, gender
 
-# العلاقات المنطقية بين التشخيص والعلاج والوصفة والتحاليل
+# Diagnosis mapping with weights and details
 diagnosis_map = {
     'Flu': {
         'weight': 30,
@@ -73,7 +73,7 @@ diagnosis_weights = [diagnosis_map[d]['weight'] for d in diagnosis_choices]
 
 doctors = ['Dr. Smith', 'Dr. Lee', 'Dr. Patel', 'Dr. Carter']
 
-# توليد البيانات
+# Function to generate clinic data
 def generate_clinic_data(n_rows=100000):
     data = {
         "id": [],
@@ -122,15 +122,13 @@ def generate_clinic_data(n_rows=100000):
 
     return pd.DataFrame(data)
 
-# توليد البيانات
-df = generate_clinic_data()
 
-# تقسيم البيانات إلى 3 أجزاء
+df = generate_clinic_data()
+# Splitting the dataframe into 3 parts and saving in different formats
 split_dfs = np.array_split(df, 3)
 
-# حفظ كل جزء في ملف مختلف
 split_dfs[0].to_csv("clinic_data22.csv", index=False)
 split_dfs[1].to_csv("clinic_data33.txt", sep='\t', index=False)
 split_dfs[2].to_excel("clinic_data11.xlsx", index=False)
 
-print("✔️ تم إنشاء الملفات مقسمة:\n- clinic_data2.csv\n- clinic_data3.txt\n- clinic_data1.xlsx")
+print("\n- clinic_data2.csv\n- clinic_data3.txt\n- clinic_data1.xlsx")
